@@ -1,0 +1,7 @@
+.env
+node_modules/
+fbadeviceauths.json
+to-do.txt
+VSCodeCounter/
+stats.json
+nodemon.json

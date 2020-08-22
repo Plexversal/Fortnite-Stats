@@ -1,0 +1,10 @@
+{
+    "discord": {
+        "defaultPrefix": "!",
+        "colors": {
+            "success": "#00FFFF",
+            "error": "#ff0000"
+        },
+        "devID": "264932076145475586" 
+    }
+}
