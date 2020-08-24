@@ -33,12 +33,14 @@ module.exports = class Canvas {
         let compTime = 0
         let compKd = 0
         let compWinrate = 0
+        let compKills = 0
 
         let defaultWins = 0
         let defaultMatches = 0
         let defaultTime = 0
         let defaultKd = 0
         let defaultWinrate = 0
+        let defaultKills = 0
 
         let amountofentries = 0
 
@@ -61,6 +63,9 @@ module.exports = class Canvas {
                     if(e.includes(`winrate`)){
                         compWinrate += (e[1] * 100);
                     }
+                    if(e.includes(`kills`)){
+                        compKills += (e[1]);
+                    }
                 })
 
             }
@@ -82,19 +87,23 @@ module.exports = class Canvas {
                     if(e.includes(`winrate`)){
                         defaultWinrate += (e[1] * 100);
                     }
+                    if(e.includes(`kills`)){
+                        defaultKills += (e[1]);
+                    }
                 })
 
             }
         }
 
         let overallwins =  compWins + defaultWins
-        let overalmatches = compMatches + defaultMatches
+        let overallmatches = compMatches + defaultMatches
         let overalltimeplayed = Math.floor((compTime + defaultTime) / 60)
-        let overallwinrate = (((stats.lifetime.all.defaultsolo ? stats.lifetime.all.defaultsolo.winrate : 0) + (stats.lifetime.all.defaultduo ? stats.lifetime.all.defaultduo.winrate : 0) + (stats.lifetime.all.defaultsquad ? stats.lifetime.all.defaultsquad.winrate : 0)) / 3).toFixed(1)
-        let overallkd = (((stats.lifetime.all.defaultsolo ? stats.lifetime.all.defaultsolo.kdr : 0) + (stats.lifetime.all.defaultduo ? stats.lifetime.all.defaultduo.kdr : 0) + (stats.lifetime.all.defaultsquad ? stats.lifetime.all.defaultsquad.kdr : 0)) / 3).toFixed(2)
+        let overallwinrate = ((overallwins / overallmatches) * 100).toFixed(2)
+        let overallkills = compKills + defaultKills
+        let overallkd = ((overallkills / (overallmatches - overallwins))).toFixed(2)
 
         let ltmwins = parseInt(stats.lifetime.all.all.placetop1 - (overallwins))
-        let ltmmatches = parseInt(stats.lifetime.all.all.matchesplayed - overalmatches)
+        let ltmmatches = parseInt(stats.lifetime.all.all.matchesplayed - overallmatches)
 
         ctx.drawImage(template, 0, 0, canvas.width, canvas.height);
 
@@ -124,7 +133,7 @@ module.exports = class Canvas {
         ctx.fillText(overallwins, 55, 146)
         ctx.fillText(overallkd, 145, 146)
         ctx.fillText(`${overallwinrate}%`, 245, 146)
-        ctx.fillText(overalmatches, 367, 146)
+        ctx.fillText(overallmatches, 367, 146)
         ctx.fillText(`${overalltimeplayed}hr`, 503, 146)
 
 
@@ -181,12 +190,14 @@ module.exports = class Canvas {
         let compTime = 0
         let compKd = 0
         let compWinrate = 0
+        let compKills = 0
 
         let defaultWins = 0
         let defaultMatches = 0
         let defaultTime = 0
         let defaultKd = 0
         let defaultWinrate = 0
+        let defaultKills = 0
 
         let amountofentries = 0
 
@@ -209,6 +220,9 @@ module.exports = class Canvas {
                     if(e.includes(`winrate`)){
                         compWinrate += (e[1] * 100);
                     }
+                    if(e.includes(`kills`)){
+                        compKills += (e[1]);
+                    }
                 })
 
             }
@@ -230,19 +244,23 @@ module.exports = class Canvas {
                     if(e.includes(`winrate`)){
                         defaultWinrate += (e[1] * 100);
                     }
+                    if(e.includes(`kills`)){
+                        defaultKills += (e[1]);
+                    }
                 })
 
             }
         }
 
         let overallwins =  compWins + defaultWins
-        let overalmatches = compMatches + defaultMatches
+        let overallmatches = compMatches + defaultMatches
         let overalltimeplayed = Math.floor((compTime + defaultTime) / 60)
-        let overallwinrate = (((stats.season.all.defaultsolo ? stats.season.all.defaultsolo.winrate : 0) + (stats.season.all.defaultduo ? stats.season.all.defaultduo.winrate : 0) + (stats.season.all.defaultsquad ? stats.season.all.defaultsquad.winrate : 0)) / 3).toFixed(1)
-        let overallkd = (((stats.season.all.defaultsolo ? stats.season.all.defaultsolo.kdr : 0) + (stats.season.all.defaultduo ? stats.season.all.defaultduo.kdr : 0) + (stats.season.all.defaultsquad ? stats.season.all.defaultsquad.kdr : 0)) / 3).toFixed(2)
+        let overallwinrate = ((overallwins / overallmatches) * 100).toFixed(2)
+        let overallkills = compKills + defaultKills
+        let overallkd = ((overallkills / (overallmatches - overallwins))).toFixed(2)
 
         let ltmwins = parseInt(stats.season.all.all.placetop1 - (overallwins))
-        let ltmmatches = parseInt(stats.season.all.all.matchesplayed - overalmatches)
+        let ltmmatches = parseInt(stats.season.all.all.matchesplayed - overallmatches)
 
         ctx.drawImage(template, 0, 0, canvas.width, canvas.height);
 
@@ -272,7 +290,7 @@ module.exports = class Canvas {
         ctx.fillText(overallwins, 55, 146)
         ctx.fillText(overallkd, 145, 146)
         ctx.fillText(`${overallwinrate}%`, 245, 146)
-        ctx.fillText(overalmatches, 367, 146)
+        ctx.fillText(overallmatches, 367, 146)
         ctx.fillText(`${overalltimeplayed}hr`, 503, 146)
 
 
