@@ -68,9 +68,7 @@ module.exports.run = async (client, message, args, settings) => {
         }
 
         let level = await awaitLevel()
-        fs.writeFile('extract.json', JSON.stringify(level, null, 4), (err) => {
-            if(err) return console.error(err)
-        })
+
         let embed = new discord.MessageEmbed()
             .setColor(config.discord.colors.success)
             .setTitle(`Season Level for **${stats.user.displayName}**`)
