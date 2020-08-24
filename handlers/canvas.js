@@ -160,7 +160,7 @@ module.exports = class Canvas {
         ctx.fillText(checkLength(stats.lifetime.all.defaultsquad.matchesplayed), 248, 354)}
         // ltms
         ctx.fillText(checkLength(ltmwins), 60 + 273, 354)
-        ctx.fillText(`${stats.lifetime.all.all.minutesplayed ? checkLength(Math.floor(stats.lifetime.all.all.minutesplayed / 60)) : 0}hr`, 117 + 273, 354)
+        ctx.fillText(`${stats.lifetime.all.all.minutesplayed ? checkLength(Math.floor(stats.lifetime.all.all.minutesplayed / 60 - overalltimeplayed)) : 0}hr`, 117 + 273, 354)
         ctx.fillText(`${checkLength(stats.lifetime.all.all.kills - ((stats.lifetime.defaultsolo ? stats.lifetime.defaultsolo.kills : 0) +
             (stats.lifetime.defaultduo ? stats.lifetime.defaultduo.kills : 0) +
             (stats.lifetime.defaultsquad ? stats.lifetime.defaultsquad.kills : 0)))}`, 180 + 273, 354)
@@ -317,7 +317,7 @@ module.exports = class Canvas {
         ctx.fillText(checkLength(stats.season.all.defaultsquad.matchesplayed), 248, 354)}
         // ltms
         ctx.fillText(checkLength(ltmwins), 60 + 273, 354)
-        ctx.fillText(`${stats.season.all.all.minutesplayed ? checkLength(Math.floor(stats.season.all.all.minutesplayed / 60)) : 0}hr`, 117 + 273, 354)
+        ctx.fillText(`${stats.season.all.all.minutesplayed ? checkLength(Math.floor(stats.season.all.all.minutesplayed / 60 - overalltimeplayed)) : 0}hr`, 117 + 273, 354)
         ctx.fillText(`${checkLength(stats.season.all.all.kills - ((stats.season.defaultsolo ? stats.season.defaultsolo.kills : 0) +
             (stats.season.defaultduo ? stats.season.defaultduo.kills : 0) +
             (stats.season.defaultsquad ? stats.season.defaultsquad.kills : 0)))}`, 180 + 273, 354)
