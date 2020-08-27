@@ -71,7 +71,7 @@ module.exports.run = async (client, message, args, settings) => {
 
         let embed = new discord.MessageEmbed()
             .setColor(config.discord.colors.success)
-            .setTitle(`Season Level for **${stats.user.displayName}**`)
+            .setTitle(`Season 13 Level for **${stats.user.displayName}**`)
             .setFooter(`This is an experimental feature, data may not be fully accurate/not show at all.`)
             .addFields([
                 {
