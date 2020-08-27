@@ -100,7 +100,7 @@ module.exports = class Canvas {
         let overalltimeplayed = Math.floor((compTime + defaultTime) / 60)
         let overallwinrate = ((overallwins / overallmatches) * 100).toFixed(2)
         let overallkills = compKills + defaultKills
-        let overallkd = ((overallkills / (overallmatches - overallwins))).toFixed(2)
+        let overallkd = ((overallkills / ((overallmatches - overallwins > 0) ? overallmatches - overallwins : 1))).toFixed(2)
 
         let ltmwins = parseInt(stats.lifetime.all.all.placetop1 - (overallwins))
         let ltmmatches = parseInt(stats.lifetime.all.all.matchesplayed - overallmatches)
@@ -257,7 +257,7 @@ module.exports = class Canvas {
         let overalltimeplayed = Math.floor((compTime + defaultTime) / 60)
         let overallwinrate = ((overallwins / overallmatches) * 100).toFixed(2)
         let overallkills = compKills + defaultKills
-        let overallkd = ((overallkills / (overallmatches - overallwins))).toFixed(2)
+        let overallkd = ((overallkills / ((overallmatches - overallwins > 0) ? overallmatches - overallwins : 1))).toFixed(2)
 
         let ltmwins = parseInt(stats.season.all.all.placetop1 - (overallwins))
         let ltmmatches = parseInt(stats.season.all.all.matchesplayed - overallmatches)
