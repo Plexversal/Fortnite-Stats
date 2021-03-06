@@ -5,3 +5,7 @@ to-do.txt
 VSCodeCounter/
 stats.json
 nodemon.json
+guilds.json
+users.json
+data backups/
+extract.json

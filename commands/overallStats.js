@@ -1,4 +1,4 @@
-const canvas = require('../handlers/canvas')
+const canvas = require('../handlers/overallCanvas')
 const { fnClient } = require('../index')
 const { dbfind, dbfindEpic } = require('../handlers/db')
 
@@ -50,7 +50,7 @@ module.exports.run = async (client, message, args, settings) => {
     if(!args[0]) {
         
         if (!dbEpic || !dbEpic.userID == message.member.id) 
-        return message.reply(`\`Error:\` No EPIC account is associated with your account. You can link your username using \`${dbdata.prefix}set <your epic username>\`. To view an epic account, use \`${dbdata.prefix}stats <epicname>\`.`)
+        return message.reply(`\`Error:\` No EPIC account is associated with your account. You can link your username using \`${dbdata.prefix}set your epicname\`. To view an epic account, use \`${dbdata.prefix}stats epicname\`.`)
 
         const awaitEpicStats = () => {
             return Promise.resolve(fnClient.stats.getV2Stats(dbEpic.epicID))

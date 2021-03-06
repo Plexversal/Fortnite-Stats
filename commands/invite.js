@@ -1,4 +1,4 @@
-const invite = `https://discordapp.com/api/oauth2/authorize?client_id=493039575988568064&permissions=8&scope=bot`
+const invite = require('../db/config.json').discord.invite
 
 module.exports.run = async (client, message) => {
 

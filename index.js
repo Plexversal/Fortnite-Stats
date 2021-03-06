@@ -3,14 +3,13 @@ const config = require('./db/config.json')
 const util = require('util')
 const discord = require('discord.js')
 const client = new discord.Client({ fetchAllMembers: false, disableEveryone: true});
-const { Client } = require('fortnite-basic-api');
+const { Client, Communicator, FriendStatus } = require('fortnite-basic-api');
 const fs = require('fs').promises;
 const path = require('path')
 const mongoose = require('mongoose')
 const guildConfig = require('./db/models/guilds')
 const userConfig = require('./db/models/users')
 require('dotenv').config();
-
 
 client.commands = new discord.Collection()
 client.aliases = new discord.Collection()
@@ -27,21 +26,49 @@ client.cmdPermissions = new discord.Collection()
     launcherToken: 'MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=',
     fortniteToken: 'ZWM2ODRiOGM2ODdmNDc5ZmFkZWEzY2IyYWQ4M2Y1YzY6ZTFmMzFjMjExZjI4NDEzMTg2MjYyZDM3YTEzZmM4NGQ=',
     autokill: true,
-    seasonStartTime: '1598504400'
+    seasonStartTime: '1606867200'
   });
+
+  // const communicator = new Communicator(fnClient);
+
+  // (async () => {
+  //   // EMAIL should be same as the account logging in with exchange!
+  //   // The reason is that the deviceauth will be saved under "client.email"
+  //   // In the JSON file on disk
+  
+  //   // This is where the magic happen
+  //   console.log('Success creation of device auth',
+  //     await fnClient.createDeviceAuthFromExchangeCode());
+  
+  //   // Perform the login process of the "client"
+  //   console.log('Success login with created device auth',
+  //     await fnClient.authenticator.login());
+  
+  //   const parallel = await Promise.all([
+  //     fnClient.lookup.accountLookup('iXyles'),
+  //     fnClient.authenticator.accountId,
+  //   ]);
+  
+  //   (parallel).forEach((result) => {
+  //     console.log(result);
+  //   });
+  
+  //   // Node will die and print that the session has been killed if login was successful
+  // })();
 
 client.login(process.env.DISCORD_TOKEN);
 
 let retryCount = 0;
 (async function loginFn() {
   await fnClient.authenticator.login()
-  .then(function(fn){
-    if(fn.error && retryCount < 10) setTimeout(() => {
-      retryCount++
-      console.log(`error on login, retrying, count: ${retryCount}`)
-      return loginFn()
-    }, 10000)
-  console.log(`Fortnite client sign in: ${util.inspect(fn, true, 4, true)}`)
+  .then(async function(fn){
+      if(fn.error && retryCount < 10){ 
+        setTimeout(() => {
+          retryCount++
+          console.log(`error on login, retrying, count: ${retryCount}`)
+          return loginFn()
+      }, 10000)
+    }
   })
 })()
 
@@ -75,7 +102,7 @@ fs.readdir(path.join(__dirname, 'commands'))
       client.cmdPermissions.set(a, file)
     })
   })
-  console.log(`-All commands Loaded-\n`)
+  console.log(`-All commands Loaded-\n`) 
 })
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });

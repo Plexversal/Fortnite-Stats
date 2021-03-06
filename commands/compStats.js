@@ -1,9 +1,12 @@
-const canvas = require('../handlers/seasonCanvas')
+const canvas = require('../handlers/compCanvas')
 const { fnClient } = require('../index')
 const { dbfind, dbfindEpic } = require('../handlers/db')
 
 module.exports.run = async (client, message, args, settings) => {
 
+    // NOT COMPLETE - TODO
+
+    if(message.author.id !== config.discord.devID) return;
     const aliases = `${this.config.name}, ` + this.config.aliases.map(e => `${e}`).join(", ");
 
     const awaitdata = () => {
@@ -57,7 +60,7 @@ module.exports.run = async (client, message, args, settings) => {
 
         let stats = await awaitEpicStats()
         if(stats.error) return message.reply(stats.error).catch(e => e)
-        return await new canvas(stats, message).season()
+        return await new canvas(stats, message).comp()
 
     } else {
 
@@ -67,7 +70,7 @@ module.exports.run = async (client, message, args, settings) => {
 
         let stats = await awaitEpicStats()
         if(stats.error) return message.reply(stats.error).catch(e => e)
-        return await new canvas(stats, message).season()
+        return await new canvas(stats, message).comp()
     }
 
     
@@ -75,8 +78,8 @@ module.exports.run = async (client, message, args, settings) => {
 }
 
 module.exports.config = {
-    name: "season",
-    aliases: [],
-    description: "View the current overall season stats for an epic account or your linked epic account.",
-    permission: ["User"]
+    name: "comp",
+    aliases: ["arena"],
+    description: "View comp and arena season stats for an epic account or your linked epic account.",
+    permission: ["dev"]
 }

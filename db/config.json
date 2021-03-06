@@ -5,6 +5,7 @@
             "success": "#00FFFF",
             "error": "#ff0000"
         },
-        "devID": "264932076145475586" 
+        "devID": "264932076145475586",
+        "invite": "https://discordapp.com/api/oauth2/authorize?client_id=493039575988568064&permissions=8&scope=bot"
     }
 }

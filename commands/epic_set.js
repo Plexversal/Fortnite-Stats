@@ -40,6 +40,7 @@ module.exports.run = async (client, message, args, settings) => {
     try {
 
         if(!args[0]) return message.reply('\`Error:\` Please enter a valid EPIC username.')
+        if(/your\sepicname/g.test(args.join(" "))) return message.reply(`\`Error:\` Looks like you're the type of person to write "your name" in the name section on a test paper. Grow a second brain cell and try again.`)
         if(args[0].toLowerCase() == `epic_default`) {
             userConfig.deleteOne({userID: message.member.id}, (err) => {
                 if(err) message.channel.send(`Could not remove link: ${err}`)

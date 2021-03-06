@@ -53,7 +53,7 @@ module.exports.run = async (client, message, args, settings) => {
     if(!args[0]) {
         
         if (!dbEpic || !dbEpic.userID == message.member.id) 
-        return message.reply(`\`Error:\` No EPIC account is associated with your account. You can link your username using \`${dbdata.prefix}set <your epic username>\`. To view an epic account, use \`${dbdata.prefix}stats <epicname>\`.`)
+        return message.reply(`\`Error:\` No EPIC account is associated with your account. You can link your username using \`${dbdata.prefix}set your epicname\`. To view an epic account, use \`${dbdata.prefix}stats epicname\`.`)
 
         const awaitEpicStats = () => {
             return Promise.resolve(fnClient.stats.getV2Stats(dbEpic.epicID))
@@ -71,7 +71,7 @@ module.exports.run = async (client, message, args, settings) => {
 
         let embed = new discord.MessageEmbed()
             .setColor(config.discord.colors.success)
-            .setTitle(`Season 13 Level for **${stats.user.displayName}**`)
+            .setTitle(`Season Level for **${stats.user.displayName}**`)
             .setFooter(`This is an experimental feature, data may not be fully accurate/not show at all.`)
             .addFields([
                 {
@@ -81,7 +81,7 @@ module.exports.run = async (client, message, args, settings) => {
                 },
                 {
                     name: `Current Level`, 
-                    value: (`${level[0].stats.s13_social_bp_level ? `${(level[0].stats.s13_social_bp_level / 100).toFixed(0)}` : `No Data`}`), 
+                    value: (`${level[0].stats.s15_social_bp_level ? `${((level[0].stats.s15_social_bp_level < 1000 ? 1 : level[0].stats.s15_social_bp_level / 100)).toFixed(0)}` : `No Data`}`), 
                     inline: true
                 }
 
@@ -118,7 +118,7 @@ module.exports.run = async (client, message, args, settings) => {
                 },
                 {
                     name: `Current Level`, 
-                    value: (`${level[0].stats.s13_social_bp_level ? `${(level[0].stats.s13_social_bp_level / 100).toFixed(0)}` : `No Data`}`), 
+                    value: (`${level[0].stats.s15_social_bp_level ? `${((level[0].stats.s15_social_bp_level < 1000 ? 1 : level[0].stats.s15_social_bp_level / 100)).toFixed(0)}` : `No Data`}`), 
                     inline: true
                 }
 

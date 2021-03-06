@@ -5,6 +5,8 @@ const { dbfind } = require('../handlers/db');
 
 module.exports = async (client, guild) => {
 
+    if(!guild.id) return;
+
     const awaitdata = () => {
         return Promise.resolve(dbfind(guild.id))
     }

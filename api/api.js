@@ -18,7 +18,7 @@ module.exports = class api {
       "startDate": 0,
       "endDate": 0,
       "owners": [id.toString()],
-      "stats": ["s11_social_bp_level", "s13_social_bp_level", "s14_social_bp_level"]
+      "stats": ["s11_social_bp_level", "s13_social_bp_level", "s14_social_bp_level", "s15_social_bp_level"]
   }
     return fetch(`https://statsproxy-public-service-live.ol.epicgames.com/statsproxy/api/statsv2/query`, {
       headers: {
@@ -31,7 +31,7 @@ module.exports = class api {
     .then(r => r)
   }
 
-  async stastRaw(id){
+  async statsRaw(id){
 
     return fetch(`https://statsproxy-public-service-live.ol.epicgames.com/statsproxy/api/statsv2/account/${id}`, {
       headers: {
