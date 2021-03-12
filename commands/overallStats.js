@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args, settings) => {
     if(dbdata.channels.length > 0){
         if(!message.member.hasPermission("ADMINISTRATOR") && !settings.permissions.mod && !settings.permissions.admin){
             if(!dbdata.channels.includes(message.channel.id)) 
-            return message.member.send(`\`ERROR:\` You cannot use the command in ${message.channel} as there are channel restrictions set by the server Administrators.`)
+            return message.member.send(`\`ERROR code 1:\` You cannot use the command in ${message.channel} as there are channel restrictions set by the server Administrators.`)
             .catch(e => e)
 
         }
@@ -24,10 +24,10 @@ module.exports.run = async (client, message, args, settings) => {
     if(dbdata.permissions.User.length > 0){
         if(!message.member.hasPermission("ADMINISTRATOR") && !settings.permissions.user && !settings.permissions.mod && !settings.permissions.admin){
             if(settings.sendReplies) 
-                return message.reply(`\`ERROR:\` You do not have permission to use this command.`)
+                return message.reply(`\`ERROR code 2:\` You do not have permission to use this command.`)
                 .catch(e => console.error(e))
             else 
-                return message.member.send(`\`ERROR:\` You do not have permission to use this command.`)
+                return message.member.send(`\`ERROR code 3:\` You do not have permission to use this command.`)
                 .catch(e => console.error(e))
         }
     }
@@ -50,14 +50,14 @@ module.exports.run = async (client, message, args, settings) => {
     if(!args[0]) {
         
         if (!dbEpic || !dbEpic.userID == message.member.id) 
-        return message.reply(`\`Error:\` No EPIC account is associated with your account. You can link your username using \`${dbdata.prefix}set your epicname\`. To view an epic account, use \`${dbdata.prefix}stats epicname\`.`)
+        return message.reply(`\`Error code 4:\` No EPIC account is associated with your account. You can link your username using \`${dbdata.prefix}set your epicname\`. To view an epic account, use \`${dbdata.prefix}stats epicname\`.`)
 
         const awaitEpicStats = () => {
             return Promise.resolve(fnClient.stats.getV2Stats(dbEpic.epicID))
         }
 
         let stats = await awaitEpicStats()
-        if(stats.error) return message.reply(stats.error).catch(e => console.log(e))
+        if(stats.error) return message.reply(`\`Error code 5:\`${stats.error}`).catch(e => console.log(e))
         return await new canvas(stats, message).overview()
 
     } else {
@@ -66,7 +66,7 @@ module.exports.run = async (client, message, args, settings) => {
         }
 
         let stats = await awaitEpicStats()
-        if(stats.error) return message.reply(stats.error).catch(e => e)
+        if(stats.error) return message.reply(`\`Error code 6:\`${stats.error}`).catch(e => e)
         return await new canvas(stats, message).overview()
     }
 
